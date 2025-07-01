@@ -1,0 +1,32 @@
+@import "tailwindcss";
+@theme {
+  /* Layout */
+  --max-width-mobile: 390px;
+  --min-width-mobile: 320px;
+  --spacing-app: 1rem;
+  --spacing-gap: 0.75rem;
+  --height-header: 56px;
+  --height-footer: 64px;
+  --height-btn: 48px;
+  --height-input: 44px;
+
+  /* Colors */
+  --color-primary: "#560591";
+  --color-dark-primary: "#1c1a4a";
+  --color-azure-accent: "#649cc6";
+  --color-cyan-accent: "#6ac0bc";
+  --color-bg: "#f5f5f5";
+
+  /* Typography */
+  --font-open: "Open Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.5rem;
+
+  /* Shadow and Radius*/
+  --border-radius-app: 18px;
+  --box-shadow-app: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
