@@ -1,16 +1,15 @@
 import React from "react"
 import { signIn } from "../api/auth.actions"
+import AuthForm from "../components/AuthForm"
 
 const AuthPage = () => {
   const handleLogin = async () => {
     await signIn({ email: "djt@whitehouse.gov", password: "ChinaIsWrong" })
   }
   return (
-    <div>
+    <div className="w-full h-full flex justify-center items-center">
       {" "}
-      <button type="button" onClick={handleLogin}>
-        Click me
-      </button>
+      <AuthForm />
     </div>
   )
 }

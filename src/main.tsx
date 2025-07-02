@@ -6,12 +6,15 @@ import { BrowserRouter, Route, Routes } from "react-router"
 import HomePage from "./pages/HomePage.tsx"
 import ProtectedRoute from "./pages/layouts/ProtectedRoute.tsx"
 import AuthPage from "./pages/AuthPage"
+import AuthLayout from "./pages/layouts/AuthLayout.tsx"
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <BrowserRouter>
       <Routes>
-        <Route path="/auth/*" element={<AuthPage />} />
+        <Route path="/auth/*" element={<AuthLayout />}>
+          <Route index element={<AuthPage />} />
+        </Route>
         <Route path="/" element={<ProtectedRoute />}>
           <Route index element={<HomePage />} />
         </Route>
