@@ -1,7 +1,5 @@
 import axios, { AxiosError } from "axios"
 import type { ReactNode } from "react"
-import { useNavigate } from "react-router"
-
 import { SWRConfig } from "swr"
 
 export const axiosInstance = axios.create({
@@ -22,16 +20,19 @@ axiosInstance.interceptors.response.use(
     const originalRequest = error?.config!
     if (
       error.response?.status === 401 &&
-      !originalRequest.url?.includes("/auth/refresh-token")
+      !originalRequest.url?.includes("/auth/refresh-token") &&
+      !originalRequest.url?.includes("/auth/login")
     ) {
       try {
-        await axiosInstance.post("/auth/refresh-token")
-        return axiosInstance(originalRequest)
+        await axiosInstance.post("/auth/refresh-token").then(() => {
+          return axiosInstance(originalRequest)
+        })
       } catch (refreshError) {
         window.location.href = "/auth/sign-in"
         return Promise.reject(refreshError)
       }
     }
+    return Promise.reject(error)
   }
 )
 

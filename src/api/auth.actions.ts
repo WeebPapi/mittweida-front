@@ -7,17 +7,26 @@ import {
   type SignUpDataType,
 } from "./interfaces"
 import { axiosInstance, fetcher } from "./swr"
+import type { AxiosError } from "axios"
 
-export const signIn = (formData: SignInDataType) => {
+export const signIn = async (formData: SignInDataType) => {
   const validatedData = SignInData.parse(formData)
-  axiosInstance.post("/auth/login", validatedData)
+  try {
+    await axiosInstance.post("/auth/login", validatedData)
+    return { success: true }
+  } catch (error: any) {
+    return { success: false, error }
+  }
 }
 
-export const signUp = (formData: SignUpDataType) => {
+export const signUp = async (formData: SignUpDataType) => {
   const validatedData = SignUpData.parse(formData)
-  axiosInstance
-    .post("/auth/register", validatedData)
-    .then((res) => console.log(res))
+  try {
+    await axiosInstance.post("/auth/register", validatedData)
+    return { success: true }
+  } catch (error: any) {
+    return { success: false, error }
+  }
 }
 
 export const getCurrentUser = () => {
