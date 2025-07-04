@@ -10,7 +10,7 @@ const ProtectedRoute: React.FC = () => {
   const navigate = useNavigate()
   useEffect(() => {
     if (error) {
-      navigate("/auth/sign-in")
+      navigate("/auth")
     }
   }, [navigate, error])
 

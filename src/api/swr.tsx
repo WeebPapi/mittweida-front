@@ -28,7 +28,7 @@ axiosInstance.interceptors.response.use(
           return axiosInstance(originalRequest)
         })
       } catch (refreshError) {
-        window.location.href = "/auth/sign-in"
+        window.location.href = "/auth/"
         return Promise.reject(refreshError)
       }
     }
