@@ -6,7 +6,10 @@ export const getRandomActivities = (limit: number = 4) => {
   try {
     const activitiesRequest = useSWR<Activity[]>(
       `/activities/random?limit=${limit}`,
-      fetcher
+      fetcher,
+      {
+        revalidateOnFocus: false,
+      }
     )
     return activitiesRequest
   } catch (error) {

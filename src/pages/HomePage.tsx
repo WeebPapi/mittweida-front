@@ -2,16 +2,17 @@ import { getRandomActivities } from "@/api/activities.actions"
 import { getCurrentUser } from "@/api/auth.actions"
 import ActivityCard from "@/components/ActivityCard"
 import ActivityFiltration from "@/components/ActivityFiltration"
+import { useGeolocation } from "@/hooks/useGeolocation"
 
 const HomePage = () => {
   const { error } = getCurrentUser()
+  useGeolocation()
   const { data: activities, error: activitiesError } = getRandomActivities()!
   if (error || activitiesError) return null
   return (
     <main className="h-full">
-      <h1>Hello</h1>
       <ActivityFiltration />
-      <div className="flex flex-col justify-center items-center h-full gap-10 py-16">
+      <div className="flex flex-col justify-center items-center h-full gap-10 py-6">
         {activities?.map((activity) => (
           <ActivityCard
             key={activity.id}

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { motion } from "framer-motion"
-import Link from "next/link"
-import { LucideIcon } from "lucide-react"
+import { Link } from "react-router"
+import type { LucideIcon } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 interface NavItem {
@@ -33,7 +33,7 @@ export function NavBar({ items, className }: NavBarProps) {
     <div
       className={cn(
         "fixed bottom-0 sm:top-0 left-1/2 -translate-x-1/2 z-50 mb-6 sm:pt-6",
-        className,
+        className
       )}
     >
       <div className="flex items-center gap-3 bg-background/5 border border-border backdrop-blur-lg py-1 px-1 rounded-full shadow-lg">
@@ -44,12 +44,12 @@ export function NavBar({ items, className }: NavBarProps) {
           return (
             <Link
               key={item.name}
-              href={item.url}
+              to={item.url}
               onClick={() => setActiveTab(item.name)}
               className={cn(
                 "relative cursor-pointer text-sm font-semibold px-6 py-2 rounded-full transition-colors",
                 "text-foreground/80 hover:text-primary",
-                isActive && "bg-muted text-primary",
+                isActive && "bg-muted text-primary"
               )}
             >
               <span className="hidden md:inline">{item.name}</span>

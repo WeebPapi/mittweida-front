@@ -1,10 +1,13 @@
 import type { Activity } from "@/api/db.types"
+import { calculateDistance } from "@/api/getDistance"
 import { fetcher } from "@/api/swr"
+import { useGeolocation } from "@/hooks/useGeolocation"
 import { useNavigate, useParams } from "react-router"
 import useSWR from "swr"
 
 const ActivityPage = () => {
   const { id } = useParams()
+  const userLocation = useGeolocation()
   const navigate = useNavigate()
   const { data, isLoading, error } = useSWR<Activity>(
     `/activities/${id}`,
@@ -19,7 +22,12 @@ const ActivityPage = () => {
         <div>
           <h1 className="text-2xl font-semibold py-4">{data.name}</h1>
           {data.videoUrl ? (
-            <video className="w-full object-cover" src={data.videoUrl} />
+            <video
+              autoPlay
+              controls
+              className="w-full object-cover"
+              src={data.videoUrl}
+            />
           ) : (
             <img
               className="w-full object-cover"
@@ -30,9 +38,19 @@ const ActivityPage = () => {
           )}
         </div>
         <div className="flex flex-col pt-6">
-          <div className="pb-3 border-b-gray-200 border-b-2 flex justify-between">
+          <div className="pb-3 border-b-gray-200 border-b-2 flex justify-between mb-4">
             <p className="font-medium">Category:</p>
             <p>{data.category}</p>
+          </div>
+          <div className="pb-3 border-b-gray-200 border-b-2 flex justify-between mb-4">
+            <p className="font-medium">Distance:</p>
+            <p>
+              {calculateDistance(userLocation, {
+                latitude: data.latitude,
+                longitude: data.longitude,
+              })}
+              km
+            </p>
           </div>
         </div>
       </main>
