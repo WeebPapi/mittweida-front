@@ -2,13 +2,14 @@ import type { Activity } from "@/api/db.types"
 import { calculateDistance } from "@/api/getDistance"
 import { fetcher } from "@/api/swr"
 import { useGeolocation } from "@/hooks/useGeolocation"
-import { useNavigate, useParams } from "react-router"
+import { useParams } from "react-router"
 import useSWR from "swr"
+import MapComponent from "@/components/MapComponent"
 
 const ActivityPage = () => {
   const { id } = useParams()
-  const userLocation = useGeolocation()
-  const navigate = useNavigate()
+  const userLocation = { latitude: 50.9864103, longitude: 12.973655 } //useGeolocation()
+
   const { data, isLoading, error } = useSWR<Activity>(
     `/activities/${id}`,
     fetcher
@@ -52,6 +53,14 @@ const ActivityPage = () => {
               km
             </p>
           </div>
+          <MapComponent
+            userLocation={userLocation}
+            destination={{
+              latitude: data.latitude,
+              longitude: data.longitude,
+            }}
+            destinationAddress={{ name: data.name, address: data.address }}
+          />
         </div>
       </main>
     )

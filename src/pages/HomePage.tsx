@@ -5,7 +5,7 @@ import { fetcher } from "@/api/swr"
 import ActivityCard from "@/components/ActivityCard"
 import ActivityFiltration from "@/components/ActivityFiltration"
 import { useGeolocation } from "@/hooks/useGeolocation"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import useSWR from "swr"
 
 const HomePage = () => {
@@ -18,10 +18,6 @@ const HomePage = () => {
     : useSWR<Activity[]>(newUrl, fetcher)
   if (error || activitiesError) return null
 
-  useEffect(() => {
-    console.log(newUrl)
-    console.log(activities)
-  }, [newUrl, activities])
   return (
     <main className="h-full">
       <ActivityFiltration

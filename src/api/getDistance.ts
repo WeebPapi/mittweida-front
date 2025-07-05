@@ -1,6 +1,4 @@
-import axios from "axios"
-
-interface LocationInfo {
+export interface LocationInfo {
   latitude: number
   longitude: number
 }
