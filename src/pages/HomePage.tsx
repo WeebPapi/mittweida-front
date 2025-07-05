@@ -1,17 +1,33 @@
 import { getRandomActivities } from "@/api/activities.actions"
 import { getCurrentUser } from "@/api/auth.actions"
+import type { Activity } from "@/api/db.types"
+import { fetcher } from "@/api/swr"
 import ActivityCard from "@/components/ActivityCard"
 import ActivityFiltration from "@/components/ActivityFiltration"
 import { useGeolocation } from "@/hooks/useGeolocation"
+import { useEffect, useState } from "react"
+import useSWR from "swr"
 
 const HomePage = () => {
   const { error } = getCurrentUser()
+  const [toggleFilters, setToggleFilters] = useState(false)
+  const [newUrl, setNewUrl] = useState("")
   useGeolocation()
-  const { data: activities, error: activitiesError } = getRandomActivities()!
+  const { data: activities, error: activitiesError } = !toggleFilters
+    ? getRandomActivities()!
+    : useSWR<Activity[]>(newUrl, fetcher)
   if (error || activitiesError) return null
+
+  useEffect(() => {
+    console.log(newUrl)
+    console.log(activities)
+  }, [newUrl, activities])
   return (
     <main className="h-full">
-      <ActivityFiltration />
+      <ActivityFiltration
+        setToggleFilters={setToggleFilters}
+        setNewUrl={setNewUrl}
+      />
       <div className="flex flex-col justify-center items-center h-full gap-10 py-6">
         {activities?.map((activity) => (
           <ActivityCard

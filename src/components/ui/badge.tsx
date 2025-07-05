@@ -53,7 +53,7 @@ export const Badge = ({
 }: BadgeProps) => {
   return (
     <div
-      className={`inline-flex justify-center items-center shrink-0 rounded-[9999px] font-sans font-medium whitespace-nowrap tabular-nums ${
+      className={`inline-flex justify-center items-center shrink-0 rounded-[9999px] font-sans font-medium whitespace-nowrap tabular-nums transition-all duration-400 ${
         variants[variant]
       } ${sizes[size]}${capitalize ? " capitalize" : ""}`}
     >

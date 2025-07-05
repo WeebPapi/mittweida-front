@@ -5,26 +5,39 @@ interface Props {
   label: string
   category: string
   onClick: (category: string) => void
+  chosenFilter: string
+  setChosenFilter: React.Dispatch<React.SetStateAction<string>>
 }
 
-const FilterCategory: React.FC<Props> = ({ label, onClick, category }) => {
+const FilterCategory: React.FC<Props> = ({
+  label,
+  onClick,
+  category,
+  chosenFilter,
+  setChosenFilter,
+}) => {
   const colorMatcher = (category: string) => {
     switch (category) {
       case "Nightlife":
-        return "blue-subtle"
+        return chosenFilter === category ? "blue" : "blue-subtle"
       case "Sport":
-        return "teal-subtle"
+        return chosenFilter === category ? "teal" : "teal-subtle"
       case "Culture":
-        return "red-subtle"
+        return chosenFilter === category ? "red" : "red-subtle"
       case "Food":
-        return "amber-subtle"
+        return chosenFilter === category ? "amber" : "amber-subtle"
       default:
         return "gray"
     }
   }
   return (
     <div
+      className="cursor-pointer"
       onClick={() => {
+        if (chosenFilter === category) setChosenFilter("")
+        else {
+          setChosenFilter(category)
+        }
         onClick(category)
       }}
     >
