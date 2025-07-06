@@ -8,7 +8,7 @@ import {
   type SignUpDataType,
 } from "./interfaces"
 import { axiosInstance, fetcher } from "./swr"
-import type { User } from "./db.types"
+import type { Group, GroupMember, User } from "./db.types"
 
 export const signIn = async (formData: SignInDataType) => {
   const validatedData = SignInData.parse(formData)
@@ -35,5 +35,16 @@ export const getCurrentUser = () => {
   const returnVal = useSWR<User>("/users/profile", fetcher)
   if (returnVal.error)
     setTimeout(() => (window.location.href = location.pathname), 2000)
+
   return returnVal
+}
+
+export const getGroupOfUser = () => {
+  const user = getCurrentUser()
+  if (user.data?.groups!.length! > 0) {
+    const groupId = user.data?.groups![0].groupId
+    const returnVal = useSWR<Group>(`/groups/${groupId}`)
+
+    return returnVal
+  }
 }

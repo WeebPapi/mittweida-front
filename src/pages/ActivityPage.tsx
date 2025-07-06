@@ -2,18 +2,34 @@ import type { Activity } from "@/api/db.types"
 import { calculateDistance } from "@/api/getDistance"
 import { fetcher } from "@/api/swr"
 import { useGeolocation } from "@/hooks/useGeolocation"
-import { useParams } from "react-router"
+import { useLocation, useParams } from "react-router"
 import useSWR from "swr"
 import MapComponent from "@/components/MapComponent"
+import { useEffect, useState } from "react"
 
-const ActivityPage = () => {
+const ActivityPage: React.FC = () => {
   const { id } = useParams()
+  const location = useLocation()
+  const [isOpen, setIsOpen] = useState<boolean>(
+    JSON.parse(localStorage.getItem("isOpen") || "false")
+  )
   const userLocation = { latitude: 50.9864103, longitude: 12.973655 } //useGeolocation()
 
   const { data, isLoading, error } = useSWR<Activity>(
     `/activities/${id}`,
     fetcher
   )
+
+  useEffect(() => {
+    if (
+      !(location.state.isOpen === null) ||
+      !(location.state.isOpen === undefined)
+    ) {
+      localStorage.setItem("isOpen", location.state.isOpen)
+
+      setIsOpen(location.state.isOpen)
+    }
+  }, [location])
 
   if (error) return null
   else if (isLoading) return <p>Loading...</p>
@@ -51,6 +67,18 @@ const ActivityPage = () => {
                 longitude: data.longitude,
               })}
               km
+            </p>
+          </div>
+          <div className="pb-3 border-b-gray-200 border-b-2 flex justify-between mb-4">
+            <p className="font-medium">Status:</p>
+            <p
+              className="px-2 py-1 rounded-4xl"
+              style={{
+                color: isOpen ? "green" : "red",
+                backgroundColor: isOpen ? "lightgreen" : "lightpink",
+              }}
+            >
+              {isOpen ? "Open" : "Closed"}
             </p>
           </div>
           <MapComponent

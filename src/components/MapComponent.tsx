@@ -44,7 +44,6 @@ const MapComponent: React.FC<Props> = ({
       getWalkingRoute(startCoords, endCoords)
       countRef.current++
     }
-    console.log(route)
   }, [route])
 
   return (

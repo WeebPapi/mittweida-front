@@ -3,6 +3,7 @@ import AppLayout from "../../components/AppLayout"
 import { Outlet, useNavigate } from "react-router"
 import { Providers } from "../../api/swr"
 import { getCurrentUser } from "../../api/auth.actions"
+import Navbar from "@/components/Navbar"
 
 const ProtectedRoute: React.FC = () => {
   const { isLoading, error } = getCurrentUser()
@@ -19,7 +20,10 @@ const ProtectedRoute: React.FC = () => {
   return (
     <Providers>
       <AppLayout>
-        <Outlet />
+        <Navbar />
+        <div className="p-app">
+          <Outlet />
+        </div>
       </AppLayout>
     </Providers>
   )

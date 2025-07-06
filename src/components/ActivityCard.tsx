@@ -56,7 +56,11 @@ const ActivityCard: React.FC<Props> = ({
     <div
       className="flex flex-col relative rounded-2xl shadow-md min-h-[250px] w-[325px] cursor-pointer hover:scale-[1.03] transition-all bg-white"
       onClick={() => {
-        navigate(`/activity/${id}`)
+        navigate(`/activity/${id}`, {
+          state: {
+            isOpen,
+          },
+        })
       }}
     >
       <div className="flex-1/2 h-1/2 rounded-2xl">

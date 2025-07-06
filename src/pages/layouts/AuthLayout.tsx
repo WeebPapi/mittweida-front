@@ -6,7 +6,9 @@ const AuthLayout = () => {
   return (
     <Providers>
       <AppLayout>
-        <Outlet />
+        <div className="p-app h-full">
+          <Outlet />
+        </div>
       </AppLayout>
     </Providers>
   )
