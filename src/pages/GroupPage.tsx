@@ -13,7 +13,9 @@ const GroupPage = () => {
   if (groupData && groupData.error) return null
 
   return (
-    <main>{userGroup ? <GroupFeed group={userGroup} /> : <JoinGroup />}</main>
+    <main className="h-full">
+      {userGroup ? <GroupFeed group={userGroup} /> : <JoinGroup />}
+    </main>
   )
 }
 

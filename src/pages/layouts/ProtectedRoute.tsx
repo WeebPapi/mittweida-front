@@ -21,7 +21,7 @@ const ProtectedRoute: React.FC = () => {
     <Providers>
       <AppLayout>
         <Navbar />
-        <div className="p-app">
+        <div className="p-app h-full">
           <Outlet />
         </div>
       </AppLayout>
