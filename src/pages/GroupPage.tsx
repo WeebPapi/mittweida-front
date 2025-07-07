@@ -3,7 +3,7 @@ import { getGroupOfUser } from "@/api/auth.actions"
 import GroupFeed from "@/components/GroupFeed"
 import JoinGroup from "@/components/JoinGroup"
 
-const GroupPage = () => {
+const GroupPage: React.FC = () => {
   const groupData = getGroupOfUser()
   const [userGroup, setUserGroup] = useState(groupData?.data || null)
   useEffect(() => {

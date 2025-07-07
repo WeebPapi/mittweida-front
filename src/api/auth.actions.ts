@@ -8,7 +8,7 @@ import {
   type SignUpDataType,
 } from "./interfaces"
 import { axiosInstance, fetcher } from "./swr"
-import type { Group, GroupMember, User } from "./db.types"
+import type { Group, User } from "./db.types"
 
 export const signIn = async (formData: SignInDataType) => {
   const validatedData = SignInData.parse(formData)

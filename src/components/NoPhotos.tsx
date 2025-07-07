@@ -1,6 +1,6 @@
 import React from "react"
 
-const NoPhotos = () => {
+const NoPhotos: React.FC = () => {
   return (
     <div className="w-[340px] h-[600px] flex justify-center items-center">
       <div className="flex flex-col gap-1">

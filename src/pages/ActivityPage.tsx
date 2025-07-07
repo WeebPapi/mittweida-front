@@ -1,7 +1,7 @@
 import type { Activity } from "@/api/db.types"
 import { calculateDistance } from "@/api/getDistance"
 import { fetcher } from "@/api/swr"
-import { useGeolocation } from "@/hooks/useGeolocation"
+// import { useGeolocation } from "@/hooks/useGeolocation"
 import { useLocation, useParams } from "react-router"
 import useSWR from "swr"
 import MapComponent from "@/components/MapComponent"
