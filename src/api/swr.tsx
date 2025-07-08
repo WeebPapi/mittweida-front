@@ -3,7 +3,7 @@ import type { ReactNode } from "react"
 import { SWRConfig } from "swr"
 
 export const axiosInstance = axios.create({
-  baseURL: "http://localhost:3000/api",
+  baseURL: "https://mittweida-back-production.up.railway.app/api",
   withCredentials: true,
 })
 
@@ -28,7 +28,8 @@ axiosInstance.interceptors.response.use(
           return axiosInstance(originalRequest)
         })
       } catch (refreshError) {
-        window.location.href = "/auth/"
+        // window.location.href = "/auth/"
+        console.error(refreshError)
         return Promise.reject(refreshError)
       }
     }

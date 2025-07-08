@@ -34,7 +34,8 @@ export const getCurrentUser = () => {
   const location = useLocation()
   const returnVal = useSWR<User>("/users/profile", fetcher)
   if (returnVal.error)
-    setTimeout(() => (window.location.href = location.pathname), 2000)
+    // setTimeout(() => (window.location.href = location.pathname), 2000)
+    console.error(returnVal.error)
 
   return returnVal
 }
