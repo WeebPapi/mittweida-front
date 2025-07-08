@@ -1,5 +1,5 @@
 import useSWR from "swr"
-// import { useLocation } from "react-router"
+import { useLocation } from "react-router"
 
 import {
   SignInData,
@@ -31,11 +31,11 @@ export const signUp = async (formData: SignUpDataType) => {
 }
 
 export const getCurrentUser = () => {
-  // const location = useLocation()
+  const location = useLocation()
   const returnVal = useSWR<User>("/users/profile", fetcher)
   if (returnVal.error)
-    // setTimeout(() => (window.location.href = location.pathname), 2000)
-    console.error(returnVal.error)
+    setTimeout(() => (window.location.href = location.pathname), 2000)
+  console.error(returnVal.error)
 
   return returnVal
 }
