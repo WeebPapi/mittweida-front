@@ -16,7 +16,12 @@ const ProtectedRoute: React.FC = () => {
   }, [navigate, error])
 
   if (isLoading) return <p>Loading</p>
-  if (error) return null
+  if (error)
+    return (
+      <p className="p-app w-[300px] wrap-break-word">
+        {JSON.stringify(error.config)}
+      </p>
+    )
   return (
     <Providers>
       <AppLayout>

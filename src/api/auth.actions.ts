@@ -13,7 +13,8 @@ import type { Group, User } from "./db.types"
 export const signIn = async (formData: SignInDataType) => {
   const validatedData = SignInData.parse(formData)
   try {
-    await axiosInstance.post("/auth/login", validatedData)
+    const request = await axiosInstance.post("/auth/login", validatedData)
+    console.log(request)
     return { success: true }
   } catch (error: any) {
     return { success: false, error }

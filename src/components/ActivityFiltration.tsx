@@ -31,7 +31,7 @@ const ActivityFiltration: React.FC<Props> = ({
     { label: "🕺🏽 Nightlife", category: "Nightlife" },
     { label: "🥘 Food", category: "Food" },
     { label: "🏰 Culture", category: "Culture" },
-    { label: "⚽ Sport", category: "Sport" },
+    { label: "⚽ Sports", category: "Sports" },
   ]
   useEffect(() => {
     if (chosenFilter === "" && searchValue === "") setToggleFilters(false)

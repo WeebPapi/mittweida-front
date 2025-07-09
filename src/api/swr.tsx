@@ -3,12 +3,21 @@ import type { ReactNode } from "react"
 import { SWRConfig } from "swr"
 
 export const axiosInstance = axios.create({
-  baseURL: "https://mittweida-back-production.up.railway.app/api",
+  // baseURL: "https://mittweida-back-production.up.railway.app/api",
+  baseURL: import.meta.env.VITE_API_BASE_URL || "https://localhost:3000/api",
   withCredentials: true,
+  headers: {
+    "Content-Type": "application/json",
+  },
 })
 
 axiosInstance.interceptors.request.use(
-  (config) => config,
+  (config) => {
+    if (!config.headers["Content-Type"]) {
+      config.headers["Content-Type"] = "application/json"
+    }
+    return config
+  },
   (error) => Promise.reject(error)
 )
 

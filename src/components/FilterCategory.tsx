@@ -20,7 +20,7 @@ const FilterCategory: React.FC<Props> = ({
     switch (category) {
       case "Nightlife":
         return chosenFilter === category ? "blue" : "blue-subtle"
-      case "Sport":
+      case "Sports":
         return chosenFilter === category ? "teal" : "teal-subtle"
       case "Culture":
         return chosenFilter === category ? "red" : "red-subtle"

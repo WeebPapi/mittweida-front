@@ -44,7 +44,7 @@ const AuthForm = () => {
       if (signInRequest.success === true) {
         navigate("/")
       } else {
-        setCredentialsWrong(true)
+        if (signInRequest.error.status === 401) setCredentialsWrong(true)
       }
 
       // Handling the sign up

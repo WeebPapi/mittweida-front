@@ -18,10 +18,10 @@ const PhotoComponent: React.FC<Props> = ({
   const { data, isLoading } = useSWR<User>(`/users/${userId}`)
   if (isLoading) return <p>Loading...</p>
   return (
-    <article className="p-app max-w-[320px]">
+    <article className="py-app px-[10px] w-[310px]">
       <div className="flex gap-2 items-center py-2 border-b-1 border-b-black">
         <img
-          className="rounded-full"
+          className="rounded-full w-[40px] h-[40px] object-cover"
           src={
             data?.profilePicture
               ? data.profilePicture
@@ -29,15 +29,15 @@ const PhotoComponent: React.FC<Props> = ({
           }
         />
         <p className="text-[12px]">{data?.firstName}</p>
-      </div>
-      <img src={imgUrl} className="object-cover w-full h-full pt-2" />
-      <div className="flex justify-between items-center w-full flex-wrap mt-1 border-b-1 border-b-black pb-2">
-        {caption ? <p className="flex-1 text-[14px]">{caption}</p> : null}
         {location ? (
           <p className=" flex-1 text-end text-gray-700 text-[13px]">
             📍{location}
           </p>
         ) : null}
+      </div>
+      <img src={imgUrl} className="object-cover w-full h-full pt-2" />
+      <div className="flex justify-between items-center w-full flex-wrap mt-1 border-b-1 border-b-black pb-2">
+        {caption ? <p className="flex-1 text-[14px]">{caption}</p> : null}
       </div>
     </article>
   )

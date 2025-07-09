@@ -8,7 +8,7 @@ import AuthPage from "./pages/AuthPage"
 import AuthLayout from "./pages/layouts/AuthLayout.tsx"
 import ActivityPage from "./pages/ActivityPage.tsx"
 import GroupPage from "./pages/GroupPage.tsx"
-import PhotoSelector from "./pages/Test.tsx"
+import PhotoSelector from "./pages/PhotoUpload.tsx"
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -21,7 +21,7 @@ createRoot(document.getElementById("root")!).render(
           <Route index element={<HomePage />} />
           <Route path="/activity/:id" element={<ActivityPage />} />
           <Route path="/group" element={<GroupPage />} />
-          <Route path="/test" element={<PhotoSelector />} />
+          <Route path="/upload-photo" element={<PhotoSelector />} />
         </Route>
       </Routes>
     </BrowserRouter>
