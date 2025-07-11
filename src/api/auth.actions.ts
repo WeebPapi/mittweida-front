@@ -9,6 +9,8 @@ import {
 } from "./interfaces"
 import { axiosInstance, fetcher } from "./swr"
 import type { Group, User } from "./db.types"
+import type { ProfileUpdate } from "@/pages/profile-update.interface"
+import axios, { AxiosError } from "axios"
 
 export const signIn = async (formData: SignInDataType) => {
   const validatedData = SignInData.parse(formData)
@@ -48,5 +50,21 @@ export const getGroupOfUser = () => {
     const returnVal = useSWR<Group>(`/groups/${groupId}`)
 
     return returnVal
+  }
+}
+
+export const updateProfile = async (updateInfo: ProfileUpdate) => {
+  try {
+    const response = await axios.put("/users/profile", updateInfo, {
+      baseURL:
+        import.meta.env.VITE_API_BASE_URL || "https://localhost:3000/api",
+      withCredentials: true,
+    })
+    return { success: true, data: response.data }
+  } catch (error) {
+    if (error instanceof AxiosError)
+      return { success: false, errorCode: error.status }
+
+    return { success: false }
   }
 }
