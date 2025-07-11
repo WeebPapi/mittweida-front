@@ -19,7 +19,7 @@ const HomePage = () => {
   if (error || activitiesError) return null
 
   return (
-    <main className="h-full">
+    <main className="h-full mt-16">
       <ActivityFiltration
         setToggleFilters={setToggleFilters}
         setNewUrl={setNewUrl}

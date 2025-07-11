@@ -1,4 +1,4 @@
-import { ChevronLeft, CircleUserRound, UsersRound } from "lucide-react"
+import { CircleUserRound, HomeIcon, UsersRound } from "lucide-react"
 import React from "react"
 import { useLocation, useNavigate } from "react-router"
 
@@ -11,16 +11,16 @@ const Navbar: React.FC = () => {
       style={{
         justifyContent: !(location.pathname === "/") ? "space-between" : "end",
       }}
-      className="relative top-0 left-0 flex  min-w-mobile max-w-mobile items-center bg-primary-indigo w-full p-app"
+      className="fixed z-40 top-0 left-0 flex min-w-mobile max-w-mobile items-center bg-primary-indigo w-full p-app"
     >
       {!(location.pathname === "/") && (
         <div
           className="cursor-pointer"
           onClick={() => {
-            navigate(-1)
+            navigate("/")
           }}
         >
-          <ChevronLeft color="white" size={28} />
+          <HomeIcon color="white" size={28} />
         </div>
       )}
       <div className="w-[80px] flex justify-between ">
@@ -32,7 +32,12 @@ const Navbar: React.FC = () => {
         >
           <UsersRound color="white" size={28} />
         </span>
-        <span className="cursor-pointer">
+        <span
+          onClick={() => {
+            navigate("/profile")
+          }}
+          className="cursor-pointer"
+        >
           <CircleUserRound color="white" size={28} />
         </span>
       </div>

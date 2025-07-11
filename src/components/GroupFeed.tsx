@@ -13,7 +13,7 @@ interface Props {
 const GroupFeed: React.FC<Props> = ({ group, photos }) => {
   const navigate = useNavigate()
   return (
-    <div className="relative h-full">
+    <div className="relative h-full ">
       <div
         onClick={() => {
           navigate("/upload-photo")

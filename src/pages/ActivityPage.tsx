@@ -35,7 +35,7 @@ const ActivityPage: React.FC = () => {
   else if (isLoading) return <p>Loading...</p>
   else if (data)
     return (
-      <main>
+      <main className="mt-12">
         <div>
           <h1 className="text-2xl font-semibold py-4">{data.name}</h1>
           {data.videoUrl ? (

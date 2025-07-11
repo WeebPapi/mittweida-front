@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback, useEffect } from "react"
+import React, { useState, useRef, useEffect } from "react"
 import { Image, Upload, X, RotateCcw } from "lucide-react"
 import { uploadPhoto } from "@/api/group.actions"
 import { getGroupOfUser } from "@/api/auth.actions"
@@ -68,21 +68,18 @@ const PhotoSelector: React.FC = () => {
     setSelectedPhoto(photoFile)
   }
 
-  const handleInputChange = useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>) => {
-      const file = event.target.files?.[0]
-      if (file) {
-        handleFileSelect(file)
-      }
-    },
-    [handleFileSelect]
-  )
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0]
+    if (file) {
+      handleFileSelect(file)
+    }
+  }
 
-  const openFileSelector = useCallback(() => {
+  const openFileSelector = () => {
     fileInputRef.current?.click()
-  }, [])
+  }
 
-  const removePhoto = useCallback(() => {
+  const removePhoto = () => {
     if (selectedPhoto) {
       URL.revokeObjectURL(selectedPhoto.url)
       setSelectedPhoto(null)
@@ -92,7 +89,7 @@ const PhotoSelector: React.FC = () => {
     if (fileInputRef.current) {
       fileInputRef.current.value = ""
     }
-  }, [selectedPhoto])
+  }
 
   const photoUpload = async () => {
     if (!selectedPhoto) return
@@ -126,13 +123,13 @@ const PhotoSelector: React.FC = () => {
     }
   }
 
-  const formatFileSize = useCallback((bytes: number): string => {
+  const formatFileSize = (bytes: number): string => {
     if (bytes === 0) return "0 Bytes"
     const k = 1024
     const sizes = ["Bytes", "KB", "MB", "GB"]
     const i = Math.floor(Math.log(bytes) / Math.log(k))
     return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + " " + sizes[i]
-  }, [])
+  }
 
   React.useEffect(() => {
     return () => {
@@ -143,7 +140,7 @@ const PhotoSelector: React.FC = () => {
   }, [selectedPhoto])
 
   return (
-    <div className="max-w-md mx-auto p-4 bg-white rounded-lg shadow-lg">
+    <main className="max-w-md mx-auto p-app mt-24 bg-white rounded-lg shadow-lg">
       <input
         ref={fileInputRef}
         type="file"
@@ -176,7 +173,6 @@ const PhotoSelector: React.FC = () => {
         </div>
       )}
 
-      {/* Upload/Select Actions */}
       {selectedPhoto ? (
         <div className="flex flex-col gap-3">
           <Label htmlFor="caption">Caption (optional)</Label>
@@ -203,7 +199,7 @@ const PhotoSelector: React.FC = () => {
               Change Photo
             </button>
             <button
-              className="flex-1 px-4 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-all flex items-center justify-center gap-2 disabled:opacity-50"
+              className="flex-1 px-4 py-3 bg-primary-indigo text-white rounded-lg hover:bg-dark-primary-indigo transition-all flex items-center justify-center gap-2 disabled:opacity-50"
               disabled={isUploading}
               onClick={() => {
                 photoUpload()
@@ -230,7 +226,7 @@ const PhotoSelector: React.FC = () => {
 
               <button
                 type="button"
-                className="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-all font-medium"
+                className="px-6 py-3 bg-primary-indigo text-white rounded-lg hover:bg-dark-primary-indigo transition-all font-medium"
               >
                 Browse Photos
               </button>
@@ -249,7 +245,7 @@ const PhotoSelector: React.FC = () => {
           {error}
         </div>
       )}
-    </div>
+    </main>
   )
 }
 

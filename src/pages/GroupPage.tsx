@@ -17,7 +17,7 @@ const GroupPage: React.FC = () => {
   if (groupData && groupData.error) return null
 
   return (
-    <main className="h-full">
+    <main className="h-full pt-16">
       {userGroup ? (
         <GroupFeed photos={photos} group={userGroup} />
       ) : (
