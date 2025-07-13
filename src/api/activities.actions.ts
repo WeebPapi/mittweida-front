@@ -16,3 +16,13 @@ export const getRandomActivities = (limit: number = 4) => {
     console.error(error)
   }
 }
+export const getAllActivities = () => {
+  try {
+    const activitiesRequest = useSWR<Activity[]>(`/activities`, fetcher, {
+      revalidateOnFocus: false,
+    })
+    return activitiesRequest
+  } catch (error) {
+    console.error(error)
+  }
+}

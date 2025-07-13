@@ -1,4 +1,7 @@
 import axios, { AxiosError } from "axios"
+import type { Poll } from "./db.types"
+import { axiosInstance, fetcher } from "./swr"
+import useSWR from "swr"
 
 export const uploadPhoto = async (
   file: File,
@@ -59,5 +62,40 @@ export const createGroup = async (name: string) => {
       return { success: false, errorCode: error.status }
 
     return { success: false }
+  }
+}
+
+export const createPoll = async (
+  groupId: string,
+  selectedActivityIds: string[],
+  question: string = "Where should we go?",
+  expiresAt: string = new Date(Date.now() + 90 * 1000).toISOString()
+) => {
+  try {
+    const response = await axiosInstance.post("/polls", {
+      groupId,
+      selectedActivityIds,
+      question,
+      expiresAt,
+    })
+    return { success: true, data: response.data }
+  } catch (error) {
+    if (error instanceof AxiosError)
+      return { success: false, errorCode: error.status, message: error.config }
+
+    return { success: false, errorCode: 500 }
+  }
+}
+
+export const getMostRecentPollInGroup = (groupId: string) => {
+  try {
+    const response = useSWR<Poll>(`/polls/group/${groupId}`, fetcher)
+
+    return response
+  } catch (error) {
+    if (error instanceof AxiosError)
+      return { success: false, errorCode: error.status, message: error.config }
+
+    return { success: false, errorCode: 500 }
   }
 }

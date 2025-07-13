@@ -1,9 +1,11 @@
 import type { Group, Photo } from "@/api/db.types"
-import React from "react"
+import React, { useState } from "react"
 import NoPhotos from "./NoPhotos"
 import PhotoComponent from "./PhotoComponent"
 import { CameraIcon } from "lucide-react"
 import { useNavigate } from "react-router"
+import MiniNavbar from "./MiniNavbar"
+import MembersList from "./MembersList"
 
 interface Props {
   group: Group
@@ -12,8 +14,16 @@ interface Props {
 
 const GroupFeed: React.FC<Props> = ({ group, photos }) => {
   const navigate = useNavigate()
+  const [displayMembers, setDisplayMembers] = useState(false)
   return (
     <div className="relative h-full ">
+      {/*TODO: Finish this part, not complete yet */}
+      {displayMembers && (
+        <MembersList
+          members={group.members!}
+          setDisplayMembers={setDisplayMembers}
+        />
+      )}
       <div
         onClick={() => {
           navigate("/upload-photo")
@@ -23,6 +33,7 @@ const GroupFeed: React.FC<Props> = ({ group, photos }) => {
         <CameraIcon color="white" size={28} />
       </div>
       <h1 className="text-4xl mb-4">{group.name}</h1>
+      <MiniNavbar groupId={group.id} setDisplayMembers={setDisplayMembers} />
       <div className="flex flex-col justify-between items-center">
         {photos && photos?.length > 0 ? (
           photos

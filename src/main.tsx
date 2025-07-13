@@ -11,6 +11,8 @@ import GroupPage from "./pages/GroupPage.tsx"
 import PhotoSelector from "./pages/PhotoUpload.tsx"
 import CreateGroup from "./pages/CreateGroup.tsx"
 import ProfilePage from "./pages/ProfilePage.tsx"
+import PollCreation from "./pages/PollCreation.tsx"
+import VotePoll from "./pages/VotePoll.tsx"
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -23,6 +25,8 @@ createRoot(document.getElementById("root")!).render(
           <Route index element={<HomePage />} />
           <Route path="/activity/:id" element={<ActivityPage />} />
           <Route path="/group" element={<GroupPage />} />
+          <Route path="/group/create-poll" element={<PollCreation />} />
+          <Route path="/group/vote-poll" element={<VotePoll />} />
           <Route path="/upload-photo" element={<PhotoSelector />} />
           <Route path="/create-group" element={<CreateGroup />} />
           <Route path="/profile" element={<ProfilePage />} />
