@@ -9,7 +9,6 @@ interface Props {
   vidUrl?: string
   name: string
   openHours: OpenHours
-  description: string
   address: string
   category: string
   id: string
@@ -22,7 +21,6 @@ const SelectableActivityCard: React.FC<Props> = ({
   vidUrl,
   name,
   openHours,
-  description,
   address,
   category,
   id,

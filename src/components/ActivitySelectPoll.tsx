@@ -22,7 +22,6 @@ const ActivitySelectPoll: React.FC<Props> = ({
           <SelectableActivityCard
             key={activity.id}
             name={activity.name}
-            description={activity.description}
             imgUrl={activity.imageUrl || "https://placehold.co/300x200"}
             address={activity.address}
             category={activity.category}

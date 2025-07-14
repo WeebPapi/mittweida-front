@@ -1,13 +1,22 @@
 import { getCurrentUser, getGroupOfUser } from "@/api/auth.actions"
 import { createPoll, getMostRecentPollInGroup } from "@/api/group.actions"
 import ActivitySelectPoll from "@/components/ActivitySelectPoll"
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import VotePoll from "./VotePoll"
+import type { SWRResponse } from "swr"
+import type { Poll } from "@/api/db.types"
 
 const PollCreation = () => {
-  const { data, isLoading } = getCurrentUser()!
+  const { data: userData, isLoading } = getCurrentUser()!
   const { data: groupData } = getGroupOfUser()!
-  const { data: pollData } = getMostRecentPollInGroup(groupData?.id!)!
+  const pollData = getMostRecentPollInGroup(groupData?.id!) as SWRResponse<
+    Poll,
+    any,
+    any
+  >
+  const [voteOngoing, setVoteOngoing] = useState(
+    new Date(pollData.data?.expiresAt!) > new Date()
+  )
 
   const [selectedActivities, setSelectedActivities] = useState<string[]>([])
   const handlePollCreation = async () => {
@@ -18,10 +27,15 @@ const PollCreation = () => {
       if (response.success) window.location.reload()
     }
   }
+  useEffect(() => {
+    if (pollData.data)
+      setVoteOngoing(new Date(pollData.data?.expiresAt!) > new Date())
+  }, [pollData])
 
   if (isLoading) return <p>Loading...</p>
 
-  if (pollData) return <VotePoll />
+  if (voteOngoing)
+    return <VotePoll poll={pollData.data!} userId={userData?.id!} />
 
   return (
     <main className="w-full h-full flex justify-center items-center relative">

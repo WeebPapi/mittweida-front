@@ -99,3 +99,16 @@ export const getMostRecentPollInGroup = (groupId: string) => {
     return { success: false, errorCode: 500 }
   }
 }
+
+export const voteOnPoll = async (pollId: string, pollOptionId: string) => {
+  try {
+    const response = await axiosInstance.post(`/polls/${pollId}/vote`, {
+      pollOptionId,
+    })
+    return { success: true, data: response.data }
+  } catch (error) {
+    if (error instanceof AxiosError)
+      return { success: false, errorCode: error.status }
+    return { success: false, errorCode: 500 }
+  }
+}
