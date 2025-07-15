@@ -1,13 +1,15 @@
-import { getCurrentUser, updateProfile } from "@/api/auth.actions"
+import { getCurrentUser, logOut, updateProfile } from "@/api/auth.actions"
 import { Button } from "@/components/ui/button"
 import { PencilIcon } from "lucide-react"
 import React, { useEffect, useState } from "react"
 import type { profileObjKeys, ProfileUpdate } from "./profile-update.interface"
 import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
+import { useNavigate } from "react-router"
 
 const ProfilePage: React.FC = () => {
   const { data, error, isLoading } = getCurrentUser()
+  const navigate = useNavigate()
 
   if (isLoading) return <p>Loading...</p>
   else if (error) return null
@@ -24,7 +26,10 @@ const ProfilePage: React.FC = () => {
     password: "",
   })
 
-  const handleLogout = () => {}
+  const handleLogout = async () => {
+    const response = await logOut()
+    if (response.success === true) navigate("/auth")
+  }
 
   useEffect(() => {
     let sentObj: ProfileUpdate = {}
@@ -34,8 +39,6 @@ const ProfilePage: React.FC = () => {
     }
     updateProfile(sentObj)
   }, [editMode])
-
-  // Maybe useeffect will attempt to run handleUpdate every time editmode is changed to None, unless the value of a property is an empty string
 
   return (
     <div className="max-w-md mx-auto p-app mt-24 bg-white rounded-lg shadow-lg h-full flex flex-col items-center gap-12">

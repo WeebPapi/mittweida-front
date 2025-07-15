@@ -22,7 +22,8 @@ const VotableActivity: React.FC<Props> = ({
   setSelected,
 }) => {
   const handleSelection = () => {
-    setSelected(id)
+    if (selected !== id) setSelected(id)
+    else setSelected("")
   }
   return (
     <div className="flex flex-col relative rounded-2xl shadow-md h-[200px] w-[325px] cursor-pointer hover:scale-[1.03] transition-all bg-white">
@@ -32,7 +33,9 @@ const VotableActivity: React.FC<Props> = ({
           <div className="flex flex-col gap-4 items-center">
             <div
               onClick={handleSelection}
-              style={{ backgroundColor: selected ? "blue" : "#99a1af" }}
+              style={{
+                backgroundColor: selected === id ? "blue" : "#99a1af",
+              }}
               className="rounded-full w-[30px] h-[30px] transition-all duration-100"
             ></div>
           </div>

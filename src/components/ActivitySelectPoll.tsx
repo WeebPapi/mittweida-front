@@ -1,6 +1,5 @@
 import { getAllActivities } from "@/api/activities.actions"
 import React from "react"
-import ActivityCard from "./ActivityCard"
 import SelectableActivityCard from "./SelectableActivityCard"
 
 interface Props {

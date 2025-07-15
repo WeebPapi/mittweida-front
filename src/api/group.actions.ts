@@ -89,7 +89,9 @@ export const createPoll = async (
 
 export const getMostRecentPollInGroup = (groupId: string) => {
   try {
-    const response = useSWR<Poll>(`/polls/group/${groupId}`, fetcher)
+    const response = useSWR<Poll>(`/polls/group/${groupId}`, fetcher, {
+      refreshInterval: 200,
+    })
 
     return response
   } catch (error) {

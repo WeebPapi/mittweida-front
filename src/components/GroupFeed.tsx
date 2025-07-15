@@ -32,7 +32,13 @@ const GroupFeed: React.FC<Props> = ({ group, photos }) => {
       >
         <CameraIcon color="white" size={28} />
       </div>
-      <h1 className="text-4xl mb-4">{group.name}</h1>
+      <div className="flex w-full justify-between items-center">
+        <h1 className="text-4xl mb-4">{group.name}</h1>
+        <div className="p-3 bg-white shadow">
+          <p className="text-[11px]">Join Code:</p>
+          <h1 className="text-xl ">{group.code}</h1>
+        </div>
+      </div>
       <MiniNavbar groupId={group.id} setDisplayMembers={setDisplayMembers} />
       <div className="flex flex-col justify-between items-center">
         {photos && photos?.length > 0 ? (

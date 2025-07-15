@@ -1,4 +1,4 @@
-import useSWR from "swr"
+import useSWR, { type SWRResponse } from "swr"
 import { useLocation } from "react-router"
 
 import {
@@ -15,8 +15,7 @@ import axios, { AxiosError } from "axios"
 export const signIn = async (formData: SignInDataType) => {
   const validatedData = SignInData.parse(formData)
   try {
-    const request = await axiosInstance.post("/auth/login", validatedData)
-    console.log(request)
+    await axiosInstance.post("/auth/login", validatedData)
     return { success: true }
   } catch (error: any) {
     return { success: false, error }
@@ -33,24 +32,49 @@ export const signUp = async (formData: SignUpDataType) => {
   }
 }
 
+export const logOut = async () => {
+  try {
+    await axiosInstance.post("/auth/logout")
+
+    return { success: true }
+  } catch (error) {
+    if (error instanceof AxiosError)
+      return { success: false, errorCode: error.status }
+
+    return { success: false }
+  }
+}
+
 export const getCurrentUser = () => {
   const location = useLocation()
   const returnVal = useSWR<User>("/users/profile", fetcher)
   if (returnVal.error)
     setTimeout(() => (window.location.href = location.pathname), 2000)
-  console.error(returnVal.error)
 
   return returnVal
 }
 
-export const getGroupOfUser = () => {
-  const user = getCurrentUser()
-  if (user.data?.groups!.length! > 0) {
-    const groupId = user.data?.groups![0].groupId
-    const returnVal = useSWR<Group>(`/groups/${groupId}`)
+interface GetGroupOfUserResult extends SWRResponse<Group, any> {}
 
-    return returnVal
+export const getGroupOfUser = (): GetGroupOfUserResult => {
+  const {
+    data: userData,
+    isLoading: isUserLoading,
+    error: userError,
+  } = getCurrentUser()
+
+  let groupId: string | null = null
+  if (userData?.groups && userData?.groups.length! > 0) {
+    groupId = userData?.groups[0].groupId
   }
+
+  const shouldFetchGroup = !isUserLoading && !userError && groupId
+
+  const swrResponse = useSWR<Group>(
+    shouldFetchGroup ? `/groups/${groupId}` : null
+  )
+
+  return swrResponse
 }
 
 export const updateProfile = async (updateInfo: ProfileUpdate) => {

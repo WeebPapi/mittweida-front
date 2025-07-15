@@ -1,7 +1,7 @@
 import { getCurrentUser, getGroupOfUser } from "@/api/auth.actions"
 import { createPoll, getMostRecentPollInGroup } from "@/api/group.actions"
 import ActivitySelectPoll from "@/components/ActivitySelectPoll"
-import React, { useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import VotePoll from "./VotePoll"
 import type { SWRResponse } from "swr"
 import type { Poll } from "@/api/db.types"
@@ -45,7 +45,7 @@ const PollCreation = () => {
       />
       <div
         onClick={handlePollCreation}
-        className="fixed bottom-0  p-app rounded-3xl bg-teal-400 flex justify-center items-center text-white font-semibold text-[20px]"
+        className="w-full fixed bottom-0  p-app rounded-3xl bg-primary-indigo flex justify-center items-center text-white font-semibold text-[20px]"
       >
         Proceed
       </div>

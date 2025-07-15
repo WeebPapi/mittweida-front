@@ -5,6 +5,7 @@ import JoinGroup from "@/components/JoinGroup"
 
 const GroupPage: React.FC = () => {
   const groupData = getGroupOfUser()
+
   const [userGroup, setUserGroup] = useState(groupData?.data || null)
   const [photos, setPhotos] = useState(groupData?.data?.photos?.reverse())
   useEffect(() => {
@@ -14,7 +15,7 @@ const GroupPage: React.FC = () => {
     }
   }, [groupData])
   if (groupData && groupData.isLoading) return <p>Loading...</p>
-  if (groupData && groupData.error) return null
+  if (groupData && groupData.error) window.location.reload()
 
   return (
     <main className="h-full pt-16">
