@@ -12,6 +12,11 @@ import type { Group, User } from "./db.types"
 import type { ProfileUpdate } from "@/pages/profile-update.interface"
 import axios, { AxiosError } from "axios"
 
+export const getUserById = async (userId: string) => {
+  const { data } = useSWR<User>(`users/${userId}`)
+  return data
+}
+
 export const signIn = async (formData: SignInDataType) => {
   const validatedData = SignInData.parse(formData)
   try {

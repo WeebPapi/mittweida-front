@@ -74,6 +74,7 @@ const VotePoll: React.FC<Props> = ({ poll, userId }) => {
         ))}
 
         <div
+          style={{ backgroundColor: voted ? "gray" : "#560591" }}
           onClick={handlePollVote}
           className="w-full fixed bottom-0  p-app rounded-3xl bg-primary-indigo flex justify-center items-center text-white font-semibold text-[20px]"
         >

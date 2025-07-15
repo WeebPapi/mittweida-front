@@ -44,6 +44,9 @@ export const joinGroup = async (code: string) => {
     return { success: false }
   }
 }
+export const leaveGroup = async (groupId: string) => {
+  await axiosInstance.post(`/groups/leave/`, { groupId })
+}
 
 export const createGroup = async (name: string) => {
   try {

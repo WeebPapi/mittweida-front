@@ -1,5 +1,5 @@
 import type { GroupMember } from "@/api/db.types"
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import { RxCross1 } from "react-icons/rx"
 
 interface Props {
@@ -7,7 +7,11 @@ interface Props {
   setDisplayMembers: React.Dispatch<React.SetStateAction<boolean>>
 }
 const MembersList: React.FC<Props> = ({ members, setDisplayMembers }) => {
+  const [users, setUsers] = useState(members.map((member) => member.user))
   //TODO: Implement some form of fetching of users from their userIds to display group members here
+  useEffect(() => {
+    setUsers(members.map((member) => member.user))
+  }, [members])
   if (members)
     return (
       <div className="fixed z-50 w-full h-full flex flex-col bg-white">
@@ -18,12 +22,13 @@ const MembersList: React.FC<Props> = ({ members, setDisplayMembers }) => {
             setDisplayMembers(false)
           }}
         />
-        {members.map((member) => (
-          <div key={member.id}>
+        {users.map((user) => (
+          <div key={user?.id}>
             <img
-              src={member.user?.profilePicture || "https://placehold.co/100"}
+              className="w-[80px] h-[80px] object-cover rounded-full"
+              src={user?.profilePicture || "https://placehold.co/80"}
             />
-            <p>{member.user?.firstName}</p>
+            <p>{user?.firstName}</p>
           </div>
         ))}
       </div>

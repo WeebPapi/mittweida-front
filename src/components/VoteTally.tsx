@@ -10,6 +10,11 @@ const VoteTally: React.FC<Props> = ({ title, options }) => {
   const [counts, setCounts] = useState(
     options.map((option) => option.votes?.length)
   )
+  const truncateName = (name: string) => {
+    if (name.length > 6) return name.slice(0, 4) + ".."
+
+    return name
+  }
 
   useEffect(() => {
     if (options) setCounts(options.map((option) => option.votes?.length))
@@ -21,7 +26,7 @@ const VoteTally: React.FC<Props> = ({ title, options }) => {
         {options.map((option, index) => (
           <div className="flex items-center" key={option.id}>
             <p className="max-w-[65px] text-[10px]">
-              {option.activity?.name.split(" ")[0]}:
+              {truncateName(option.activity?.name.split(" ")[0]!)}:
             </p>
             <p className="text-[10px]">{counts[index]}</p>
           </div>

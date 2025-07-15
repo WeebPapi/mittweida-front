@@ -3,6 +3,7 @@ import { Link } from "react-router"
 import { BiPoll } from "react-icons/bi"
 import { MdPeopleAlt } from "react-icons/md"
 import { IoExit } from "react-icons/io5"
+import { leaveGroup } from "@/api/group.actions"
 
 interface Props {
   setDisplayMembers: React.Dispatch<React.SetStateAction<boolean>>
@@ -10,6 +11,10 @@ interface Props {
 }
 
 const MiniNavbar: React.FC<Props> = ({ setDisplayMembers, groupId }) => {
+  const handleGroupLeave = async () => {
+    await leaveGroup(groupId)
+    window.location.reload()
+  }
   return (
     <div className="flex justify-end fixed right-1">
       <div className=" bg-white rounded-4xl p-app flex gap-4 shadow">
@@ -26,7 +31,7 @@ const MiniNavbar: React.FC<Props> = ({ setDisplayMembers, groupId }) => {
         >
           <MdPeopleAlt size={24} color="white" />
         </div>
-        <div className=" bg-red-700 p-1 rounded-4xl">
+        <div onClick={handleGroupLeave} className=" bg-red-700 p-1 rounded-4xl">
           <IoExit size={24} color="white" />
         </div>
       </div>
