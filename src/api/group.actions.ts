@@ -15,7 +15,9 @@ export const uploadPhoto = async (
   if (caption) formData.append("caption", caption)
   if (location) formData.append("location", location)
   const response = await axios.post("/photos/upload", formData, {
-    baseURL: import.meta.env.VITE_API_BASE_URL || "https://localhost:3000/api",
+    baseURL:
+      import.meta.env.VITE_API_BASE_URL ||
+      "https://mittweida-back.onrender.com/api",
     withCredentials: true,
     headers: {
       "Content-Type": "multipart/form-data",
@@ -26,15 +28,7 @@ export const uploadPhoto = async (
 
 export const joinGroup = async (code: string) => {
   try {
-    const response = await axios.post(
-      "/groups/join",
-      { code },
-      {
-        baseURL:
-          import.meta.env.VITE_API_BASE_URL || "https://localhost:3000/api",
-        withCredentials: true,
-      }
-    )
+    const response = await axiosInstance.post("/groups/join", { code })
 
     return { success: true, data: response.data }
   } catch (error) {
