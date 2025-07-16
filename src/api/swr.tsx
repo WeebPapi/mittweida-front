@@ -38,8 +38,6 @@ axiosInstance.interceptors.response.use(
           return axiosInstance(originalRequest)
         })
       } catch (refreshError) {
-        if (!window.location.pathname.includes("auth"))
-          window.location.hash = "#/auth/"
         console.error(refreshError)
         return Promise.reject(refreshError)
       }

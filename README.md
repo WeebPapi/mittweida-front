@@ -1,54 +1,27 @@
-# React + TypeScript + Vite
+# Mittweida frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Aleksandre Kapanadze
 
-Currently, two official plugins are available:
+React Vite Frontend built to consume the following backend: https://github.com/WeebPapi/mittweida-back
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Frontend deployment: https://weebpapi.github.io/mittweida-front/
 
-## Expanding the ESLint configuration
+# Important Notes
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+As part of render's free plan, the backend will, on occasion spin down and shut off after 15 minutes of inactivity, you can either make a request, let it fail, give it a minute and try again so that the server is started again or you can try running the server and frontend locally on localhost, in which case, you will have to have both, localhost:3000 and localhost:5173 served with https.
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+to run the backend on https, follow the instructions from the "dev" branch of the mittweida-back repo and use that branch.
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Also, you may look in the package.json and notice you have the option of running npm run dev and dev:network, dev will work on the computer you are hosting the frontend on, while dev:network will work on a phone or other device in your network, to configure and make sure these run smoothly, you must create env files with the following structures
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## .env
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+VITE_GRAPHHOPPER_KEY="your-graphhopper-key"
+
+## .env.development.local
+
+VITE_API_BASE_URL=https://localhost:3000/api
+
+## .env.development.network
+
+VITE_API_BASE_URL=https://your-internal-ipv4-address:3000/api
