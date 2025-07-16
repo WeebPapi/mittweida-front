@@ -1,7 +1,7 @@
 import { StrictMode } from "react"
 import { createRoot } from "react-dom/client"
 import "./index.css"
-import { BrowserRouter, Route, Routes } from "react-router"
+import { BrowserRouter, HashRouter, Route, Routes } from "react-router"
 import HomePage from "./pages/HomePage.tsx"
 import ProtectedRoute from "./pages/layouts/ProtectedRoute.tsx"
 import AuthPage from "./pages/AuthPage"
@@ -15,7 +15,7 @@ import PollCreation from "./pages/PollCreation.tsx"
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <BrowserRouter basename="/mittweida-front">
+    <HashRouter>
       <Routes>
         <Route path="/auth/" element={<AuthLayout />}>
           <Route index element={<AuthPage />} />
@@ -30,6 +30,6 @@ createRoot(document.getElementById("root")!).render(
           <Route path="/profile" element={<ProfilePage />} />
         </Route>
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   </StrictMode>
 )

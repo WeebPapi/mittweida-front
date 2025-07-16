@@ -1,5 +1,5 @@
 import useSWR, { type SWRResponse } from "swr"
-import { useLocation } from "react-router"
+import { useLocation, useNavigate } from "react-router"
 
 import {
   SignInData,
@@ -52,9 +52,10 @@ export const logOut = async () => {
 
 export const getCurrentUser = () => {
   const location = useLocation()
+  const navigate = useNavigate()
   const returnVal = useSWR<User>("/users/profile", fetcher)
-  if (returnVal.error)
-    setTimeout(() => (window.location.href = location.pathname), 2000)
+  if (returnVal.error && !location.pathname.includes("auth"))
+    setTimeout(() => navigate(location.pathname), 2000)
 
   return returnVal
 }
