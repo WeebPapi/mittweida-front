@@ -27,6 +27,7 @@ const PhotoComponent: React.FC<Props> = ({
               ? data.profilePicture
               : "https://placehold.co/40"
           }
+          alt={`${data?.firstName || "User"}'s profile picture`}
         />
         <p className="text-[12px]">{data?.firstName}</p>
         {location ? (
@@ -35,7 +36,11 @@ const PhotoComponent: React.FC<Props> = ({
           </p>
         ) : null}
       </div>
-      <img src={imgUrl} className="object-cover w-full h-full pt-2" />
+      <img
+        src={imgUrl}
+        className="object-cover w-full h-full pt-2"
+        alt={caption || "User uploaded photo"}
+      />
       <div className="flex justify-between items-center w-full flex-wrap mt-1 border-b-1 border-b-black pb-2">
         {caption ? <p className="flex-1 text-[14px]">{caption}</p> : null}
       </div>

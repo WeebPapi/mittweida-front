@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React from "react"
 import { Link } from "react-router"
 import { BiPoll } from "react-icons/bi"
 import { MdPeopleAlt } from "react-icons/md"

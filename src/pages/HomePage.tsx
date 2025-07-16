@@ -16,6 +16,7 @@ const HomePage = () => {
   const { data: activities, error: activitiesError } = !toggleFilters
     ? getRandomActivities()!
     : useSWR<Activity[]>(newUrl, fetcher)
+
   if (error || activitiesError) return null
 
   return (

@@ -65,7 +65,7 @@ const ActivityCard: React.FC<Props> = ({
     >
       <div className="flex-1/2 h-1/2 rounded-2xl">
         {vidUrl ? (
-          <video src={vidUrl} autoPlay />
+          <video src={vidUrl} autoPlay={true} />
         ) : (
           <img
             width={396}
