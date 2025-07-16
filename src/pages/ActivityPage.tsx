@@ -1,7 +1,7 @@
 import type { Activity } from "@/api/db.types"
 import { calculateDistance } from "@/api/getDistance"
 import { fetcher } from "@/api/swr"
-// import { useGeolocation } from "@/hooks/useGeolocation"
+import { useGeolocation } from "@/hooks/useGeolocation"
 import { useLocation, useParams } from "react-router"
 import useSWR from "swr"
 import MapComponent from "@/components/MapComponent"
@@ -13,7 +13,7 @@ const ActivityPage: React.FC = () => {
   const [isOpen, setIsOpen] = useState<boolean>(
     JSON.parse(localStorage.getItem("isOpen") || "false")
   )
-  const userLocation = { latitude: 50.9864103, longitude: 12.973655 } //useGeolocation()
+  const userLocation = useGeolocation()
 
   const { data, isLoading, error } = useSWR<Activity>(
     `/activities/${id}`,

@@ -104,6 +104,8 @@ const PhotoSelector: React.FC = () => {
         caption.trim(),
         location.trim()
       )
+      setCaption("")
+      setLocation("")
 
       if (response.status >= 400 && response.status < 500) {
         throw new Error(

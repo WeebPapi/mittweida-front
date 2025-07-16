@@ -1,4 +1,4 @@
-import type { PollOption, Activity } from "@/api/db.types"
+import type { PollOption } from "@/api/db.types"
 import React, { useEffect, useState } from "react"
 
 interface Props {

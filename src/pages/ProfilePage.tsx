@@ -28,6 +28,7 @@ const ProfilePage: React.FC = () => {
 
   const handleLogout = async () => {
     const response = await logOut()
+    localStorage.clear()
     if (response.success === true) navigate("/auth")
   }
 
@@ -48,14 +49,10 @@ const ProfilePage: React.FC = () => {
             className="rounded-full object-cover w-[200px] h-[200px]"
             width={200}
             height={200}
-            src={data?.profilePicture || "https://placehold.co/200"}
-          />
-          <PencilIcon
-            className="absolute right-[-60px]"
-            onClick={() => {
-              if (editMode !== "Picture") setEditMode("Picture")
-              else setEditMode("None")
-            }}
+            src={
+              data?.profilePicture ||
+              "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
+            }
           />
         </span>
         <span className="flex items-center relative">
