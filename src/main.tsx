@@ -15,7 +15,7 @@ import PollCreation from "./pages/PollCreation.tsx"
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename="/mittweida-front">
       <Routes>
         <Route path="/auth/" element={<AuthLayout />}>
           <Route index element={<AuthPage />} />
