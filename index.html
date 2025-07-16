@@ -26,21 +26,6 @@
       integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
       crossorigin=""
     ></script>
-    <script>
-      // Only run this in development
-      if (
-        window.location.hostname === "localhost" ||
-        window.location.hostname.includes("192.168.0.101")
-      ) {
-        ;(function () {
-          var script = document.createElement("script")
-          script.src = "//cdn.jsdelivr.net/npm/eruda"
-          document.body.appendChild(script)
-          script.onload = function () {
-            eruda.init()
-          }
-        })()
-      }
-    </script>
+   
   </body>
 </html>
